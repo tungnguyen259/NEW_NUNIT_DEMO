@@ -1,0 +1,52 @@
+[
+  {
+    "controlName": "title textbox",
+    "type": "xpath",
+    "value": "//input[contains(@id,'title')]"
+  },
+  {
+    "controlName": "alias textbox",
+    "type": "xpath",
+    "value": "//div[contains(@class,'header')]//input[contains(@id,'alias')]"
+  },
+  {
+    "controlName": "content textbox",
+    "type": "xpath",
+    "value": "//body[@id='tinymce']"
+  },
+  {
+    "controlName": "save and new button",
+    "type": "xpath",
+    "value": "//span[@class='icon-save-new']"
+  },
+  {
+    "controlName": "save button",
+    "type": "xpath",
+    "value": "//span[@class='icon-apply icon-white']"
+  },
+  {
+    "controlName": "cancel button",
+    "type": "xpath",
+    "value": "//span[@class='icon-cancel']"
+  },
+  {
+    "controlName": "save and close button",
+    "type": "xpath",
+    "value": "//span[@class='icon-save']"
+  },
+  {
+    "controlName": "status dropdown",
+    "type": "xpath",
+    "value": "//div[contains(@id,'state')]/a[contains(@class,'state')]"
+  },
+  {
+    "controlName": "category dropdown",
+    "type": "xpath",
+    "value": "//div[@id='jform_catid_chzn']/a"
+  },
+  {
+    "controlName": "category dropdown content",
+    "type": "xpath",
+    "value": "//div[@id='jform_catid_chzn']//li[contains(.,'{0}')]"
+  }
+]

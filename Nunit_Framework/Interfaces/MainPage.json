@@ -1,0 +1,37 @@
+﻿[
+  {
+    "controlName": "content menu",
+    "type": "xpath",
+    "value": "//ul[@id='menu']//a[contains(@class,'dropdown') and contains(.,'Content')]"
+  },
+  {
+    "controlName": "articles menu",
+    "type": "xpath",
+    "value": "//ul//a[text()='Articles']"
+  },
+  {
+    "controlName": "add new article menu",
+    "type": "xpath",
+    "value": "//ul//a[text()='Add New Article']"
+  },
+  {
+    "controlName": "components menu",
+    "type": "xpath",
+    "value": "//ul[@id='menu']//a[contains(@class,'dropdown') and contains(.,'Components')]"
+  },
+  {
+    "controlName": "contacts menu",
+    "type": "xpath",
+    "value": "//ul[@id='menu']//a[contains(@class,'dropdown') and contains(.,'Contacts')]"
+  },
+  {
+   "controlName": "home page icon",
+    "type": "xpath",
+    "value": "//h1[@class='page-title']/span[@class='icon-home-2 cpanel'] "
+  },
+  {
+    "controlName": "categories menu",
+    "type": "xpath",
+    "value": "//ul[@id='menu-com-contact']/li/a[text()='Categories']"
+  }
+]

@@ -1,0 +1,62 @@
+﻿[
+  {
+    "controlName": "new button",
+    "type": "xpath",
+    "value": "//button//span[contains(@class,'icon-new')]"
+  },
+  {
+    "controlName": "edit button",
+    "type": "xpath",
+    "value": "//span[contains(@class,'icon-edit')]"
+  },
+  {
+    "controlName": "articles table",
+    "type": "xpath",
+    "value": "//table[@id='articleList']"
+  },
+  {
+    "controlName": "search textbox",
+    "type": "xpath",
+    "value": "//input[@id='filter_search']"
+  },
+  {
+    "controlName": "search button",
+    "type": "xpath",
+    "value": "//button[contains(@data-original-title,'Search')]"
+  },
+  {
+    "controlName": "trash button",
+    "type": "xpath",
+    "value": "//div[@id='toolbar-trash']/button"
+  },
+  {
+    "controlName": "articles table body",
+    "type": "xpath",
+    "value": "//table[@id='articleList']//tbody"
+  },
+  {
+    "controlName": "articles name",
+    "type": "xpath",
+    "value": "//a[@data-original-title='Edit' and contains(.,'{0}')]"
+  },
+  {
+    "controlName": "sort arrow",
+    "type": "xpath",
+    "value": "//div[@id='list_fullordering_chzn']//b"
+  },
+  {
+    "controlName": "number article arrow",
+    "type": "xpath",
+    "value": "//div[@id='list_limit_chzn']//b"
+  },
+  {
+    "controlName": "select articles checkbox",
+    "type": "xpath",
+    "value": "//a[@data-original-title='Edit' and contains(.,'{0}')]/../../..//input"
+  },
+  {
+    "controlName": "select all articles checkbox",
+    "type": "xpath",
+    "value": "//input[@data-original-title='Check All']"
+  }
+]
