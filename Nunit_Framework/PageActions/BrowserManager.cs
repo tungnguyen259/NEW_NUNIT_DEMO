@@ -39,7 +39,7 @@ namespace Nunit_Framework.PageActions
                             {
                                 if (context.Count == 0)
                                 {
-                                    DesiredCapabilities capability = DesiredCapabilities.InternetExplorer();
+                                    //DesiredCapabilities capability = DesiredCapabilities.InternetExplorer();
                                     //capability.SetCapability("InternetExplorer");
                                     //capability.SetCapability(Version);
                                     context.Add("Driver", new RemoteWebDriver(uri, DesiredCapabilities.InternetExplorer()));
@@ -143,6 +143,7 @@ namespace Nunit_Framework.PageActions
         public static void GoToUrl(string url)
         {
             Browser.Navigate().GoToUrl(url);
+            Browser.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
 
         public static void MaximizeWindow()

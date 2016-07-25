@@ -54,8 +54,8 @@ namespace Nunit_Framework.Testcases
             BrowserManager.CloseBrowser();
 
             extentReportSummary.EndTest(testSummary);
-            //extentReportSummary.Flush();
-            extentReportSummary.Close();
+            extentReportSummary.Flush();
+            //extentReportSummary.Close();
 
             // For Jenkins report
             var source = Path.Combine(resultSummaryDirectory, reportSummaryName);
@@ -82,9 +82,9 @@ namespace Nunit_Framework.Testcases
 
             extentReports = new ExtentReports(resultDirectory + reportName, true);
             test = extentReports.StartTest(TestContext.CurrentContext.Test.MethodName, "");
-
+            
             //change report config
-            string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).Parent.Parent.FullName;
+            string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName;
             extentReports.LoadConfig(path + @"\TestData\extent-config.xml");
             extentReportSummary.LoadConfig(path + @"\TestData\extent-config.xml");
         }

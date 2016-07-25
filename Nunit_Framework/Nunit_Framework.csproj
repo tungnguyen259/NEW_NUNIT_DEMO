@@ -122,21 +122,21 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Interfaces\CreateEditArticlePage.json">
+    <Content Include="Interfaces\CreateEditArticlePage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Interfaces\Json_Schema.json">
+    </Content>
+    <Content Include="Interfaces\Json_Schema.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Interfaces\LoginPage.json">
+    </Content>
+    <Content Include="Interfaces\LoginPage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Interfaces\MainPage.json">
+    </Content>
+    <Content Include="Interfaces\MainPage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Interfaces\ManageArticlePage.json">
+    </Content>
+    <Content Include="Interfaces\ManageArticlePage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

@@ -81,21 +81,18 @@ namespace Nunit_Framework.PageActions
         public IWebElement FindWebElement(string name)
         {
             string[] control = GetControlValue(name);
+            IWait<IWebDriver> wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(30.00));
             switch (control[0].ToUpper())
             {
                 case "ID":
-                    return Browser.FindElement(By.Id(control[1]));
+                    return wait.Until(Browser => Browser.FindElement(By.Id(control[1])));
                 case "NAME":
-                    return Browser.FindElement(By.Name(control[1]));
+                    return wait.Until(Browser => Browser.FindElement(By.Name(control[1])));
                 case "CLASSNAME":
-                    return Browser.FindElement(By.ClassName(control[1]));
+                    return wait.Until(Browser => Browser.FindElement(By.ClassName(control[1])));
                 default:
-                    {
-                        //IWait<IWebDriver> wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(30.00));
-                        //wait.Until(driver1 => ((IJavaScriptExecutor)Browser).ExecuteScript("return document.readyState").Equals("complete"));
-                        return Browser.FindElement(By.XPath(control[1]));
-                    }
-                    
+                    return wait.Until(Browser => Browser.FindElement(By.XPath(control[1])));
+
             }
         }
 
