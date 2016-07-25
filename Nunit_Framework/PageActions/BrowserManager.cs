@@ -118,7 +118,7 @@ namespace Nunit_Framework.PageActions
             {
                 () =>  { return new RemoteWebDriver(uri, DesiredCapabilities.Chrome()); },
                 () =>  { return new RemoteWebDriver(uri, DesiredCapabilities.InternetExplorer()); },
-                () =>  { return new RemoteWebDriver(uri, DesiredCapabilities.Edge()); },
+                () =>  { return new RemoteWebDriver(uri, DesiredCapabilities.Firefox()); },
             }.AsParallel().Select(d => d()).ToList();
             return drivers;
         }
