@@ -31,6 +31,10 @@ namespace Nunit_Framework.PageActions.ManageArticlePage
         {
             ClickOnDynamicElement(control, value);
         }
+        public void ClickArticle(string articleName)
+        {
+            ClickOnDynamicElement("articles name", articleName);
+        }
         public void SelectButtonsOnArticlesPage(String button)
         {
             switch (button)
@@ -49,7 +53,7 @@ namespace Nunit_Framework.PageActions.ManageArticlePage
                     break;
             }
         }
-        public bool IsArticleSuccessfullyCreatedMessageDisplayed()
+        public bool IsArticleSuccessfullyCreatedUpdatedMessageDisplayed()
         {
             string message = "Article successfully saved";
             return IsMessageDisplay(message);

@@ -29,5 +29,7 @@ namespace Nunit_Framework.PageActions.ManageArticlePage
 
             ClickOnElement("trash button");
         }
+
+
     }
 }

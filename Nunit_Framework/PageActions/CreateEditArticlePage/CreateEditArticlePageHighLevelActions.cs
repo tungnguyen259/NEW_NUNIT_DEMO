@@ -8,19 +8,20 @@ namespace Nunit_Framework.PageActions
 {
     public class CreateEditArticlePageHighLevelActions : CreateEditArticlePageLowLevelActions
     {
-        /*
-        public void CreateArticle(string title, string category, string articleText, string button) {
-            FilterArticleValues(title, category, articleText);
-            ClickButton(button);
+
+        /*public void CreateArticle(string title, string category, string articleText, string button)
+        {
+            FillAndSubmitArticleValues(title, category, articleText);
+            ClickCreateEditArticlePageButton(button);
         }
 
-        public void EditArticle(string title, string category, string articleText, string button) {
-            FilterArticleValues(title, category, articleText);
-            ClickButton(button);
-        }
-        */
+        public void EditArticle(string title, string category, string articleText, string button)
+        {
+            FillAndSubmitArticleValues(title, category, articleText);
+            ClickCreateEditArticlePageButton(button);
+        }*/
 
-        public void FillArticleValues(string title, string category, string articleText)
+        public void FillAndSubmitArticleValues(string title, string category, string articleText, string button)
         {
             if (!string.IsNullOrEmpty(title))
                 InputTitle(title);
@@ -28,6 +29,7 @@ namespace Nunit_Framework.PageActions
                 SelectCategory(category);
             if (!string.IsNullOrEmpty(articleText))
                 InputArticleText(articleText);
+            ClickCreateEditArticlePageButton(button);
         }
 
     }

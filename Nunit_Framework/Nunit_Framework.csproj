@@ -109,6 +109,7 @@
     <Compile Include="PageActions\CreateEditArticlePage\CreateEditArticlePageHighLevelActions.cs" />
     <Compile Include="PageActions\CreateEditArticlePage\CreateEditArticlePageLowLevelActions .cs" />
     <Compile Include="PageActions\Pages.cs" />
+    <Compile Include="Testcases\ArticlesPage\ArticlesPage_002.cs" />
     <Compile Include="Testcases\ArticlesPage\ArticlesPage_001.cs" />
     <Compile Include="Testcases\BaseTestMethods.cs" />
     <Compile Include="Testcases\Draft\CollectNUnitFailAddIn.cs" />
