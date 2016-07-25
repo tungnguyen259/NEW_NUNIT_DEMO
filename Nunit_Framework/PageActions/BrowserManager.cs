@@ -5,6 +5,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,9 +22,9 @@ namespace Nunit_Framework.PageActions
             get
             {
                 var uri = new Uri(ConfigurationManager.AppSettings["SeleniumHubUrl"]);
-                
                 string appbrowser = ConfigurationManager.AppSettings["AppBrowser"];
                 string grid = ConfigurationManager.AppSettings["grid"];
+
                 if (grid.Equals("yes"))
                 {
                     switch (appbrowser)
@@ -37,7 +38,12 @@ namespace Nunit_Framework.PageActions
                         case "ie":
                             {
                                 if (context.Count == 0)
+                                {
+                                    DesiredCapabilities capability = DesiredCapabilities.InternetExplorer();
+                                    //capability.SetCapability("InternetExplorer");
+                                    //capability.SetCapability(Version);
                                     context.Add("Driver", new RemoteWebDriver(uri, DesiredCapabilities.InternetExplorer()));
+                                }
                                 break;
                             }
                         case "Chrome":
@@ -142,15 +148,6 @@ namespace Nunit_Framework.PageActions
         public static void MaximizeWindow()
         {
             Browser.Manage().Window.Maximize();
-            //string s = (string)((IJavaScriptExecutor)Browser).ExecuteScript("return navigator.userAgent;");
-            //string s1 = Browser.GetType().Name.ToString();
-            //IList<string> s = GetBrowserName();
-            var random = new Random();
-            string[] wordList = { "a","b"};
-            string[] wordsToTest = Enumerable.Range(0, 1000000)
-                .Select(i => wordList[random.Next(0, wordList.Length)])
-                .ToArray();
-
         }
 
         public static void DeleteAllCookies()

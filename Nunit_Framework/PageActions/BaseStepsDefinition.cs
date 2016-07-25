@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using OpenQA.Selenium.Interactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using OpenQA.Selenium.Support.UI;
 
 namespace Nunit_Framework.PageActions
 {
@@ -89,7 +90,12 @@ namespace Nunit_Framework.PageActions
                 case "CLASSNAME":
                     return Browser.FindElement(By.ClassName(control[1]));
                 default:
-                    return Browser.FindElement(By.XPath(control[1]));
+                    {
+                        //IWait<IWebDriver> wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(30.00));
+                        //wait.Until(driver1 => ((IJavaScriptExecutor)Browser).ExecuteScript("return document.readyState").Equals("complete"));
+                        return Browser.FindElement(By.XPath(control[1]));
+                    }
+                    
             }
         }
 

@@ -49,8 +49,13 @@ namespace Nunit_Framework.Testcases
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
+            //Pos-condition
+            BrowserManager.DeleteAllCookies();
+            BrowserManager.CloseBrowser();
+
             extentReportSummary.EndTest(testSummary);
-            extentReportSummary.Flush();
+            //extentReportSummary.Flush();
+            extentReportSummary.Close();
 
             // For Jenkins report
             var source = Path.Combine(resultSummaryDirectory, reportSummaryName);
@@ -62,10 +67,6 @@ namespace Nunit_Framework.Testcases
                 Directory.CreateDirectory(targetPath);
             }
             File.Copy(source, destination, true);
-
-            //Pos-condition
-            BrowserManager.DeleteAllCookies();
-            BrowserManager.CloseBrowser();
         }
 
         protected void StartTest()
@@ -120,8 +121,8 @@ namespace Nunit_Framework.Testcases
             }
             TestContext.Write("Detail Results has been saved in: " + resultDirectory);
 
-            extentReports.Flush();
             testSummary.AppendChild(test);
+            extentReports.Flush();
             extentReports.EndTest(test);
 
             resultDirectory = Path.Combine(driverDirectory, "TestResults");
@@ -134,9 +135,18 @@ namespace Nunit_Framework.Testcases
                 if (!Directory.Exists(resultDirectory))
                     Directory.CreateDirectory(resultDirectory);
 
-                string screenshotFilePath = Path.Combine(resultDirectory, screenshotName);
-                SuperUtility.SaveScreenshot(BrowserManager.Browser, screenshotFilePath, System.Drawing.Imaging.ImageFormat.Png);
-                string aaa = Path.GetFileNameWithoutExtension(screenshotFilePath);
+                //string screenshotFilePath = Path.Combine(resultDirectory, screenshotName);
+                //SuperUtility.SaveScreenshot(BrowserManager.Browser, screenshotFilePath, System.Drawing.Imaging.ImageFormat.Png);
+
+                ITakesScreenshot takesScreenshot = BrowserManager.Browser as ITakesScreenshot;
+
+                if (takesScreenshot != null)
+                {
+                    var screenshot = takesScreenshot.GetScreenshot();
+                    string screenshotFilePath = Path.Combine(resultDirectory, screenshotName);
+                    screenshot.SaveAsFile(screenshotFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    Console.WriteLine("Screenshot: {0}", new Uri(screenshotFilePath));
+                }
             }
             catch (Exception ex)
             {
