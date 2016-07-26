@@ -17,7 +17,7 @@ namespace Nunit_Framework.Testcases.LoginPage
         public void TC001_LoginToJoomlaWithInValidAccount()
         {
             stepLogging("Login to joomla site with invalid account");
-            Pages.LoginPage.LoginToJoomlaSite(TestData.INVUSERNAME, TestData.INVPASSWORD);
+  //          Pages.LoginPage.LoginToJoomlaSite(TestData.INVUSERNAME, TestData.INVPASSWORD);
 
             stepLogging("Check user cannot login to joomla site");
             Pages.LoginPage.CheckInvalidAccountMgsDisplay(TestData.ERRORINVALIDACC);
