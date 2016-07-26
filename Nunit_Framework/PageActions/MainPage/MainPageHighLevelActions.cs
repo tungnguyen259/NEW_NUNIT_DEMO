@@ -12,5 +12,9 @@ namespace Nunit_Framework.PageActions.MainPage
         {
             CheckHomeIconReturns();
         }
+        public void LogoutJoomlaSite()
+        {
+
+        }
     }
 }

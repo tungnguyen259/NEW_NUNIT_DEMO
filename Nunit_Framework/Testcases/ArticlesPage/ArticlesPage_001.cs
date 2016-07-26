@@ -42,6 +42,9 @@ namespace Nunit_Framework.Testcases.Articles
 
             stepLogging("Post Condition: Delete Created Article");
             Pages.ManageArticlePage.DeleteArticle(ArticleTitle);
+            stepLogging("Post Condition: Logout");
+            //Pages.MainPage.LogoutJoomlaSite();
+            Pages.MainPage.SelectMainPageMenu("settings menu/logout button");
         }
     }
 }

@@ -25,7 +25,7 @@
     "value": "//ul[@id='menu']//a[contains(@class,'dropdown') and contains(.,'Contacts')]"
   },
   {
-   "controlName": "home page icon",
+    "controlName": "home page icon",
     "type": "xpath",
     "value": "//h1[@class='page-title']/span[@class='icon-home-2 cpanel'] "
   },
@@ -33,5 +33,17 @@
     "controlName": "categories menu",
     "type": "xpath",
     "value": "//ul[@id='menu-com-contact']/li/a[text()='Categories']"
+  },
+  {
+
+    "controlName": "settings menu",
+    "type": "xpath",
+    "value": "//span[@class='icon-cog']/.."
+  },
+  {
+    "controlName": "logout button",
+    "type": "xpath",
+    "value": "//li/a[contains(.,'Logout')]"
+
   }
 ]

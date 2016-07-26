@@ -6,19 +6,18 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace Nunit_Framework.PageActions
 {
     public class BrowserManager
     {
+        private static readonly Dictionary<String, IWebDriver> context = new Dictionary<String, IWebDriver>();
         private static string FirefoxVersion = ConfigurationManager.AppSettings["FirefoxVersion"];
         private static string firefoxPlatform = ConfigurationManager.AppSettings["FirefoxPlatform"];
         private static string ChromeVersion = ConfigurationManager.AppSettings["ChromeVersion"];
@@ -27,127 +26,113 @@ namespace Nunit_Framework.PageActions
         private static string iePlatform = ConfigurationManager.AppSettings["IEPlatform"];
         private static string EdgeVersion = ConfigurationManager.AppSettings["EdgeVersion"];
         private static string edgePlatform = ConfigurationManager.AppSettings["EdgePlatform"];
-        private static string appbrowser = ConfigurationManager.AppSettings["AppBrowser"];
-        private static string grid = ConfigurationManager.AppSettings["grid"];
-        private static string sauceLabs = ConfigurationManager.AppSettings["sauceLabs"];
-        private static readonly Dictionary<String, IWebDriver> context = new Dictionary<String, IWebDriver>();
+        private static string appBrowser = ConfigurationManager.AppSettings["AppBrowser"];
+        private static string runType = ConfigurationManager.AppSettings["RunType"];
+
         public static IWebDriver Browser
         {
             get
             {
+                var uri = new Uri(ConfigurationManager.AppSettings["SeleniumHubUrl"]);
                 if (context.Count == 0)
                 {
-                    var uri = new Uri(ConfigurationManager.AppSettings["SeleniumHubUrl"]);
-
-                    if (grid.Equals("yes"))
+                    switch (appBrowser.ToUpper())
                     {
-                        switch (appbrowser)
-                        {
-                            case "Parallel":
+                        case "IE":
+                            {
+                                var IEOptions = new InternetExplorerOptions();
+                                IEOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+                                if (runType.Equals("Local"))
                                 {
-                                    context.Add("Driver", new SuperWebDriver(GetDriverSuiteGrid()));
-                                    break;
+                                    context.Add("Driver", (IWebDriver)new InternetExplorerDriver(IEOptions));
                                 }
-                            case "ie":
+                                else if (runType.Equals("Grid"))
                                 {
                                     DesiredCapabilities capability = DesiredCapabilities.InternetExplorer();
                                     capability.SetCapability(CapabilityType.Version, IEVersion);
-                                    var IEoptions = new InternetExplorerOptions();
-                                    IEoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
                                     context.Add("Driver", new RemoteWebDriver(uri, capability));
-                                    break;
                                 }
-                            case "Chrome":
+                                else
+                                {
+                                    context.Add("Driver", driverRunOnSauceLabs("Internet Explorer", IEVersion, iePlatform));
+                                }
+                                break;
+                            }
+
+                        case "CHROME":
+                            {
+                                if (runType.Equals("Local"))
+                                {
+                                    context.Add("Driver", (IWebDriver)new ChromeDriver());
+                                }
+                                else if (runType.Equals("Grid"))
                                 {
                                     DesiredCapabilities capability = DesiredCapabilities.Chrome();
                                     capability.SetCapability(CapabilityType.Version, ChromeVersion);
                                     context.Add("Driver", new RemoteWebDriver(uri, capability));
-                                    break;
                                 }
-                            case "Edge":
+                                else
                                 {
-                                    EdgeOptions options = new EdgeOptions();
-                                    options.PageLoadStrategy = EdgePageLoadStrategy.Eager;
+                                    context.Add("Driver", driverRunOnSauceLabs("Chrome", ChromeVersion, chromePlatform));
+                                }
+                                break;
+                            }
+                        case "EDGE":
+                            {
+                                EdgeOptions EdOptions = new EdgeOptions();
+                                EdOptions.PageLoadStrategy = EdgePageLoadStrategy.Eager;
+                                if (runType.Equals("Local"))
+                                {
+                                    context.Add("Driver", (IWebDriver)new EdgeDriver(EdOptions));
+                                }
+                                else if (runType.Equals("Grid"))
+                                {
                                     DesiredCapabilities capability = DesiredCapabilities.Edge();
                                     capability.SetCapability(CapabilityType.Version, EdgeVersion);
                                     context.Add("Driver", new RemoteWebDriver(uri, capability));
-                                    break;
                                 }
-                            default:
+                                else
+                                {
+                                    context.Add("Driver", driverRunOnSauceLabs("MicrosoftEdge", EdgeVersion, edgePlatform));
+                                }
+                                break;
+                            }
+                        case "FIREFOX":
+                            {
+                                if (runType.Equals("Local"))
+                                {
+                                    context.Add("Driver", (IWebDriver)new FirefoxDriver());
+                                }
+                                else if (runType.Equals("Grid"))
                                 {
                                     DesiredCapabilities capability = DesiredCapabilities.Firefox();
                                     capability.SetCapability(CapabilityType.Version, FirefoxVersion);
                                     context.Add("Driver", new RemoteWebDriver(uri, capability));
-                                    break;
                                 }
-                        }
-                        return context["Driver"];
-                    }
-
-                    if (sauceLabs.Equals("yes"))
-                    {
-                        switch (appbrowser)
-                        {
-                            case "Parallel":
-                                {
-                                   context.Add("Driver", new SuperWebDriver(GetDriverSuiteRunOnSauceLabs()));
-                                    break;
-                                }
-                            case "ie":
-                                {
-                                    context.Add("Driver", driverRunOnSauceLabs("Internet Explorer", IEVersion, iePlatform));
-                                    break;
-                                }
-                            case "Chrome":
-                                {
-                                    context.Add("Driver", driverRunOnSauceLabs("Chrome", ChromeVersion, chromePlatform));
-                                    break;
-                                }
-                            case "Edge":
-                                {
-                                    context.Add("Driver", driverRunOnSauceLabs("MicrosoftEdge", EdgeVersion, edgePlatform));
-                                    break;
-                                }
-                            default:
                                 {
                                     context.Add("Driver", driverRunOnSauceLabs("firefox", FirefoxVersion, firefoxPlatform));
-                                    break;
                                 }
-                        }
-                        return context["Driver"];
-                    }
-
-                    switch (appbrowser)
-                    {
-                        case "Parallel":
-                            {
-                                context.Add("Driver", new SuperWebDriver(GetDriverSuiteNonGrid()));
                                 break;
                             }
-                        case "ie":
+                        case "PARALLEL":
                             {
-                                var IEoptions = new InternetExplorerOptions();
-                                IEoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
-                                context.Add("Driver", (IWebDriver)new InternetExplorerDriver(IEoptions));
-                                break;
-                            }
-                        case "Chrome":
-                            {
-
-                                context.Add("Driver", (IWebDriver)new ChromeDriver());
-                                break;
-                            }
-                        case "Edge":
-                            {
-                                EdgeOptions options = new EdgeOptions();
-                                options.PageLoadStrategy = EdgePageLoadStrategy.Eager;
-                                context.Add("Driver", (IWebDriver)new EdgeDriver());
+                                if (runType.Equals("Local"))
+                                {
+                                    context.Add("Driver", new SuperWebDriver(GetDriverSuiteNonGrid()));
+                                }
+                                else if (runType.Equals("Grid"))
+                                {
+                                    context.Add("Driver", new SuperWebDriver(GetDriverSuiteGrid()));
+                                }
+                                else
+                                {
+                                    context.Add("Driver", new SuperWebDriver(GetDriverSuiteRunOnSauceLabs()));
+                                }
                                 break;
                             }
                         default:
                             {
-
-                                context.Add("Driver", (IWebDriver)new FirefoxDriver());
+                                Console.Write("Not Support Yet");
                                 break;
                             }
                     }
@@ -155,7 +140,6 @@ namespace Nunit_Framework.PageActions
                 return context["Driver"];
             }
         }
-
 
         private static IWebDriver driverRunOnSauceLabs(string browser, string version, string platform)
         {
@@ -231,8 +215,6 @@ namespace Nunit_Framework.PageActions
         {
             Browser.Navigate().GoToUrl(url);
             Browser.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
-            var IEoptions = new InternetExplorerOptions();
-            IEoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
         }
 
         public static void MaximizeWindow()

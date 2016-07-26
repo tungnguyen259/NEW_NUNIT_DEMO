@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using OpenQA.Selenium.Support.Extensions;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace Nunit_Framework.Testcases
 {
@@ -119,9 +120,13 @@ namespace Nunit_Framework.Testcases
             }
             TestContext.Write("Detail Results has been saved in: " + resultDirectory);
 
-            bool passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
-            ((IJavaScriptExecutor)BrowserManager.Browser).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-
+            //Add result to sauce labs
+            if (ConfigurationManager.AppSettings["RunType"].ToUpper().Equals("SAUCELABs"))
+            {
+                bool passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
+                ((IJavaScriptExecutor)BrowserManager.Browser).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+            }
+            
             extentReports.Flush();
             testSummary.AppendChild(test);
             extentReports.EndTest(test);

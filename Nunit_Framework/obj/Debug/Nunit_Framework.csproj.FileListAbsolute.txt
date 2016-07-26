@@ -21,6 +21,7 @@ F:\LastTestNUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\bin\Debug\WebDriver.xm
 F:\LastTestNUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\bin\Debug\WebDriver.Support.xml
 F:\LastTestNUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\obj\Debug\Nunit_Framework.dll
 F:\LastTestNUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\obj\Debug\Nunit_Framework.pdb
+F:\LastTestNUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\obj\Debug\Nunit_Framework.csprojResolveAssemblyReference.cache
 F:\GITHUB_PROJECT\DEMONUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\bin\Debug\MicrosoftWebDriver.exe
 F:\GITHUB_PROJECT\DEMONUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\bin\Debug\IEDriverServer.exe
 F:\GITHUB_PROJECT\DEMONUNITGIT\Nunit_Git_TDD_Project\Nunit_Framework\bin\Debug\Interfaces\CreateEditArticlePage.json
