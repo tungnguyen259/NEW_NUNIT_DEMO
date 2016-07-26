@@ -53,10 +53,10 @@ namespace Nunit_Framework.PageActions.ManageArticlePage
                     break;
             }
         }
-        public bool IsArticleSuccessfullyCreatedUpdatedMessageDisplayed()
+        public bool IsArticleSuccessfullyCreatedUpdatedMessageDisplayed(string success_mes)
         {
-            string message = "Article successfully saved";
-            return IsMessageDisplay(message);
+            //string message = "Article successfully saved";
+            return IsMessageDisplay(success_mes);
         }
     }
 }

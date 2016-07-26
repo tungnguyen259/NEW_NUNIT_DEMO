@@ -13,9 +13,10 @@ namespace Nunit_Framework
         public static string PASSWORD = "12345678";
         public static string INVUSERNAME = "abc";
         public static string INVPASSWORD = "abc";
-        public static string ERRORINVALIDACC = "Username and password do not match or you do not have an account yet.";
+        public static string ERRORINVALIDACC = "Username and password do not match or you do not have an account yet fail.";
         public static string ARTICLETITLEDEFAULT = "Article_Title";
         public static string ARTICLECATEGORYDEFAULT = "Uncategorised";
         public static string ARTICLETEXTDEFAULT = "Article_Text";
+        public static string SUCCESS_MESSAGE = "Article successfully saved";
     }
 }

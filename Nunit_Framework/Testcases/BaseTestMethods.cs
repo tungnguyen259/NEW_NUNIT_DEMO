@@ -50,12 +50,10 @@ namespace Nunit_Framework.Testcases
         public void OneTimeTearDown()
         {
             //Pos-condition
-            BrowserManager.DeleteAllCookies();
             BrowserManager.CloseBrowser();
 
             extentReportSummary.EndTest(testSummary);
             extentReportSummary.Flush();
-            //extentReportSummary.Close();
 
             // For Jenkins report
             var source = Path.Combine(resultSummaryDirectory, reportSummaryName);
@@ -121,8 +119,11 @@ namespace Nunit_Framework.Testcases
             }
             TestContext.Write("Detail Results has been saved in: " + resultDirectory);
 
-            testSummary.AppendChild(test);
+            bool passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
+            ((IJavaScriptExecutor)BrowserManager.Browser).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+
             extentReports.Flush();
+            testSummary.AppendChild(test);
             extentReports.EndTest(test);
 
             resultDirectory = Path.Combine(driverDirectory, "TestResults");

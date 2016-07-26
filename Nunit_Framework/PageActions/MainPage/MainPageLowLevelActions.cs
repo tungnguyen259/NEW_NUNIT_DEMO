@@ -10,7 +10,6 @@ namespace Nunit_Framework.PageActions.MainPage
             int pos = path.IndexOf("/");
             string[] count = path.Split('/');
             int total = count.Length;
-            Thread.Sleep(2000);
             ClickOnElement(count[0]);
 
             if (total == 3)
@@ -21,7 +20,7 @@ namespace Nunit_Framework.PageActions.MainPage
             }
             else
                 ClickOnElement(count[1]);
-    
+            Thread.Sleep(2000);
         }
         public bool CheckHomeIconReturns()
         {

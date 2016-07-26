@@ -37,8 +37,8 @@ namespace Nunit_Framework.Testcases.Articles
             Pages.CreateEditArticlePage.FillAndSubmitArticleValues(ArticleTitle, TestData.ARTICLECATEGORYDEFAULT, TestData.ARTICLETEXTDEFAULT, "Save & Close");
 
             stepLogging("11. Verify the article is saved successfully");
-            Pages.ManageArticlePage.IsArticleSuccessfullyCreatedUpdatedMessageDisplayed();
-            Pages.ManageArticlePage.IsArticleDisplayed(ArticleTitle);
+            PageActions.Pages.ManageArticlePage.IsArticleSuccessfullyCreatedUpdatedMessageDisplayed(TestData.SUCCESS_MESSAGE);
+            PageActions.Pages.ManageArticlePage.IsArticleDisplayed(ArticleTitle);
 
             stepLogging("Post Condition: Delete Created Article");
             Pages.ManageArticlePage.DeleteArticle(ArticleTitle);
