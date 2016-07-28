@@ -30,6 +30,9 @@ namespace Nunit_Framework.Testcases.LoginPage
 
             stepLogging("Check user can login to joomla site successful");
             Pages.MainPage.CheckMainPageDisplay();
+
+            stepLogging("Post Condition: Logout");
+            Pages.MainPage.SelectMainPageMenu("settings menu/logout button");
         }
     }
 }

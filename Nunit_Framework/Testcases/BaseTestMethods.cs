@@ -119,19 +119,19 @@ namespace Nunit_Framework.Testcases
                 test.Log(LogStatus.Info, "Snapshot below: " + test.AddScreenCapture(resultDirectory + "\\" + screenshotName));
             }
             TestContext.Write("Detail Results has been saved in: " + resultDirectory);
-
-            //Add result to sauce labs
-            if (ConfigurationManager.AppSettings["RunType"].ToUpper().Equals("SAUCELABs"))
-            {
-                bool passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
-                ((IJavaScriptExecutor)BrowserManager.Browser).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-            }
             
             extentReports.Flush();
             testSummary.AppendChild(test);
             extentReports.EndTest(test);
 
             resultDirectory = Path.Combine(driverDirectory, "TestResults");
+
+            //Add result to sauce labs
+            if (ConfigurationManager.AppSettings["RunType"].ToUpper().Equals("SAUCELABS"))
+            {
+                bool passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
+                ((IJavaScriptExecutor)BrowserManager.Browser).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+            }
         }
 
         protected void TakeScreenshot(string resultDirectory, string screenshotName)

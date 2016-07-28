@@ -109,6 +109,7 @@ namespace Nunit_Framework.PageActions
                                     capability.SetCapability(CapabilityType.Version, FirefoxVersion);
                                     context.Add("Driver", new RemoteWebDriver(uri, capability));
                                 }
+                                else
                                 {
                                     context.Add("Driver", driverRunOnSauceLabs("firefox", FirefoxVersion, firefoxPlatform));
                                 }
@@ -175,18 +176,12 @@ namespace Nunit_Framework.PageActions
             var uri = new Uri(ConfigurationManager.AppSettings["SeleniumHubUrl"]);
 
             //Check node version in Parallel Grid mode
-            string FirefoxVersion = ConfigurationManager.AppSettings["FirefoxVersion"];
-            string ChromeVersion = ConfigurationManager.AppSettings["ChromeVersion"];
-            string IEVersion = ConfigurationManager.AppSettings["IEVersion"];
             DesiredCapabilities capabilityChrome = DesiredCapabilities.Chrome();
             capabilityChrome.SetCapability(CapabilityType.Version, ChromeVersion);
             DesiredCapabilities capabilityIE = DesiredCapabilities.InternetExplorer();
             capabilityIE.SetCapability(CapabilityType.Version, IEVersion);
             DesiredCapabilities capabilityFF = DesiredCapabilities.Firefox();
             capabilityFF.SetCapability(CapabilityType.Version, FirefoxVersion);
-
-            //Demo Multi version
-
 
             // Allow some degree of parallelism when creating drivers, which can be slow
             IList<IWebDriver> drivers = new List<Func<IWebDriver>>

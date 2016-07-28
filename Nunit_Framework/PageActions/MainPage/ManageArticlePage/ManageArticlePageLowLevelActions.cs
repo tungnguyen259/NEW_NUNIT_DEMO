@@ -55,6 +55,7 @@ namespace Nunit_Framework.PageActions.ManageArticlePage
         }
         public bool IsArticleSuccessfullyCreatedUpdatedMessageDisplayed(string success_mes)
         {
+            //string message = "Article successfully saved";
             return IsMessageDisplay(success_mes);
         }
     }
